@@ -26,49 +26,87 @@ import random
 # Replace the pass statement with your implementation.
 
 class ParentClass:
-    CRITICAL_HIT_MULTIPLIER = 2
+    """A dungeon crawler class""""
+    CRITICAL_HIT_MULTIPLIER = 3
 
     def __init__(self, name, hit_points=100, attack=25):
+        """Create a new dungeon crawler instance.
+        
+        the player's alive status is set to True when instantiated.
+
+        name        the name of the dungeon crawler
+        hit_points  the amount of hit points (default 100)
+        attack      the amount of normal attack damage (default 25)
+        """"
         self._name = name
         self._hit_points = hit_points
         self._attack = attack
         self._is_alive = True
 
     def get_name(self):
+        """returns the crawler's name""""
         return self._name
 
     def get_hit_points(self):
+        """returns the crawler's remaining hit points""""
         return self._hit_points
 
     def get_attack(self):
+        """returns the crawler's attack damage""""
         return self._attack
 
     def is_alive(self):
+        """returns True if the crawler is still alive, False if dead""""
         return self._is_alive
 
     def deduct_hit_points(self, amount):
+        """deduct a specified amount of hit points from the crawler
+
+        Returns True if the damage was deducted, Prints a status update to STDOUT
+        if the crawler dies and changes the crawler's slive status.
+
+        Returns False if the crawler is already dead.
+        """"
         if not self.is_alive():
             return False
         else:
             self._hit_points -= amount
             if self._hit_points <= 0:
+                print(f"{self.get_name()} has died", "\n")
                 self._is_alive = False
             return True
 
     def __str__(self):
+    """"Overloaded __str__ method
+
+    Print(crawler_object) will print the crawler's name, remaining hit points, and status
+    """
         return f"Name: {self.get_name()}, HP: {
-            self.get_hit_points()}, Attack: {self.get_attack()}"
+            self.get_hit_points()}, Attack: {self.get_attack()}, Alive?: {self.is_alive()}"
 
     def attack(self, target):
-        damage = self.get_attack
+    """Attack another crawler
+    
+    Displays the amount of damage dealt and the target's information after each 
+    successful attack.
+
+    Return True if the attack was successful, False if the crawler is currently dead,
+    False if the target is already dead.
+    """"
+        if not self.is_alive():
+            print(f"{self.get_name()} can't attack when dead", "\n")
+            return False
+        damage = self.get_attack()
         if random.randint(1, 20) > 15:
             damage *= ParentClass.CRITICAL_HIT_MULTIPLIER
             print("Critical hit!")
         if target.deduct_hit_points(damage):
-            print(f"{damage} damage dealt to {target.get_name()}")
-            print(target)
+            print(f"{damage} damage dealt to {target.get_name()}", "\n")
+            print(target, "\n")
+            return True
         else:
-            print(f"{target.get_name()} is already dead")
+            print(f"{target.get_name()} is already dead", "\n")
+            return False
 
 
 # TODO 2:
@@ -84,40 +122,71 @@ class ParentClass:
 # Replace the pass statement with your implementation.
 
 class ChildClass(ParentClass):
+    """A defensive mage class with a damage reduction ability, extends crawler""""
     SHIELD_COST = 1
     MAGIC_ATTACK_COST = 3
 
     def __init__(self, name, hit_points=100, attack=25, magic_attack=50, mana=10):
+        """Create a new defensive mage crawler instance
+
+        the mage's alive status is set to True when instantiated.
+
+        name            the name of the dungeon crawler
+        hit_points      the amount of hit points (default 100)
+        attack          the amount of normal attack damage (default 25)
+        magic_attack    the amount of magic attack damage (default 50)
+        mana            the amount of mana points remaining (default 10)
+        """
         super().__init__(name, hit_points, attack)
         self._magic_attack = magic_attack
         self._mana = mana
 
     def get_magic_attack(self):
+        """returns the crawler's magic attack damage""""
         return self._magic_attack
 
     def get_mana(self):
+        """returns the crawler's remaining mana""""
         return self._mana
 
     def deduct_hit_points(self, amount):
+        """Overloaded method from parent class
+        applies a damage reduction to oncoming damage for a mana cost
+        """"
         if self.get_mana() > 0:
-            amount -= random.randint(0, 25)
+            dmg_redux = random.randint(0, 25)
+            amount -= dmg_redux
             self._mana -= ChildClass.SHIELD_COST
         return super().deduct_hit_points(amount)
 
     def magic_attack(self, target):
+        """The mage crawler's magic attack, can only be used if there is enough
+        remaining mana points. When the attack is successful, the mana cost is 
+        applied to the crawler's remaining mana and returns True.
+        Returns False if insufficient mana points.
+        """"
+        if not self.is_alive():
+            print(f"{self.get_name()} can't attack when dead", "\n")
+            return False
         starting_hp = target.get_hit_points()
         if self.get_mana() >= ChildClass.MAGIC_ATTACK_COST:
-            if target.deduct_hit_points(self.get_magic_attack()):
+            if target.deduct_hit_points(amount=self.get_magic_attack()):
                 self._mana -= ChildClass.MAGIC_ATTACK_COST
                 print(f"{starting_hp - target.get_hit_points()} damage dealt to {
-                      target.get_name()}")
-                print(target)
+                      target.get_name()}", "\n")
+                print(target, "\n")
+                return True
             else:
-                print(f"{target.get_name()} is already dead")
+                print(f"{target.get_name()} is already dead", "\n")
+                return False
         else:
-            print("not enough mana")
+            print("not enough mana", "\n")
+            return False
 
     def __str__(self):
+        """Overloaded __str__ method, returns superclass's __str__ function with
+        mage specific information appended.
+        """"
         return f"{super().__str__()}, Magic attack: {self.get_magic_attack()}, Mana: {self.get_mana()}"
 
 
@@ -162,8 +231,12 @@ def demonstrate_copying():
     print("\n=== Copy Demonstration ===")
     print("TODO: Implement shallow copy and deep copy demonstration")
     object1 = ChildClass("Doughnut")
-    object2 = object1
-    object3 = deepcopy(object1)
+
+    #Shallow copy, the instance namespace of object2 matches object1
+    object2 = object1 
+
+    #Deep copy. the instance namespace of object3 is separate from the other 2 instances
+    object3 = deepcopy(object1) 
 
     object1._name = "Mongo"
     object3.magic_attack(object1)
@@ -186,11 +259,23 @@ def demonstrate_copying():
 def main():
     print("=== Unit 1 OOP Assignment ===")
 
-    print("\nTODO: Create and test your parent object")
     player1 = ParentClass("Carl")
     player2 = ChildClass("Tina")
 
-    print("\nTODO: Create and test your child object")
+    print(player1, "\n")
+    print(player2, "\n")
+
+    for i in range(1, 11):
+        print(f"===== Round {i} ======")
+        if not player1.is_alive():
+            print(f"fight over, {player2.get_name()} wins")
+            break
+        elif not player2.is_alive():
+            print(f"fight over, {player1.get_name()} wins")
+            break
+        else:
+            player1.attack(player2)
+            player2.magic_attack(player1)
 
     demonstrate_namespaces()
     demonstrate_copying()
