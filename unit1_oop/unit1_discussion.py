@@ -1,15 +1,3 @@
-"""
-===========================================================
-Unit 1 DISCUSSION: Python OOP, Namespaces, and Copying
-===========================================================
-
-INSTRUCTIONS:
-In this assignment, you will build and explore object-oriented programming (OOP) concepts in Python.
-You are provided with starter code containing TODO sections. Your task is to complete, modify, and
-analyze the code to demonstrate understanding of inheritance, namespaces, and object copying.
-"""
-
-
 from copy import copy, deepcopy
 import random
 
@@ -26,17 +14,23 @@ import random
 # Replace the pass statement with your implementation.
 
 class ParentClass:
-    """A dungeon crawler class"""
+    """A dungeon crawler class
+
+    Attributes:
+        name: the name of the dungeon crawler
+        hit_points: the amount of hit points (default 100)
+        attack: the amount of normal attack damage (default 25)
+        is_alive: the status of the crawler
+    """
     CRITICAL_HIT_MULTIPLIER = 3
 
     def __init__(self, name, hit_points=100, attack=25):
-        """Create a new dungeon crawler instance.
-        
-        the player's alive status is set to True when instantiated.
+        """Create a new dungeon crawler instance
 
-        name        the name of the dungeon crawler
-        hit_points  the amount of hit points (default 100)
-        attack      the amount of normal attack damage (default 25)
+        Args:
+            name: the name of the dungeon crawler
+            hit_points: the amount of hit points (default 100)
+            attack: the amount of normal attack damage (default 25)
         """
         self._name = name
         self._hit_points = hit_points
@@ -60,12 +54,16 @@ class ParentClass:
         return self._is_alive
 
     def deduct_hit_points(self, amount):
-        """deduct a specified amount of hit points from the crawler
+        """Deduct a specified amount of hit points from the crawler
 
-        Returns True if the damage was deducted, Prints a status update to STDOUT
-        if the crawler dies and changes the crawler's slive status.
+            Prints a status update to STDOUT if the crawler dies and changes the 
+            crawler's alive status.
 
-        Returns False if the crawler is already dead.
+        Args:
+            amount: the amount of damage to be applied
+
+        Returns: 
+            True if the damage was deducted, False if otherwise
         """
         if not self.is_alive():
             return False
@@ -80,18 +78,24 @@ class ParentClass:
         """Overloaded __str__ method
 
         Print(crawler_object) will print the crawler's name, remaining hit points, and status
+
+        Returns:
+            a formatted string with the crawler's information
         """
         return f"Name: {self.get_name()}, HP: {
             self.get_hit_points()}, Attack: {self.get_attack()}, Alive?: {self.is_alive()}"
 
     def attack(self, target):
-        """Attack another crawler
-    
+        """Basic Attack
+
         Displays the amount of damage dealt and the target's information after each 
         successful attack.
 
-        Return True if the attack was successful, False if the crawler is currently dead,
-        False if the target is already dead.
+        Args:
+            target: another instance of the crawler class
+
+        Returns:
+            True if the attack is successful, False otherwise.
         """
         if not self.is_alive():
             print(f"{self.get_name()} can't attack when dead", "\n")
@@ -122,20 +126,28 @@ class ParentClass:
 # Replace the pass statement with your implementation.
 
 class ChildClass(ParentClass):
-    """A defensive mage class with a damage reduction ability, extends crawler"""
+    """A defensive mage class with a damage reduction ability, extends crawler.
+
+    Attributes:
+        name: the name of the dungeon crawler
+        hit_points: the amount of hit points (default 100)
+        attack: the amount of normal attack damage (default 25)
+        is_alive: the status of the crawler
+        magic_attack: the amount of magic attack damage (default 50)
+        mana: the amount of mana points remaining (default 10)
+    """
     SHIELD_COST = 1
     MAGIC_ATTACK_COST = 3
 
     def __init__(self, name, hit_points=100, attack=25, magic_attack=50, mana=10):
         """Create a new defensive mage crawler instance
 
-        the mage's alive status is set to True when instantiated.
-
-        name            the name of the dungeon crawler
-        hit_points      the amount of hit points (default 100)
-        attack          the amount of normal attack damage (default 25)
-        magic_attack    the amount of magic attack damage (default 50)
-        mana            the amount of mana points remaining (default 10)
+        Args:
+            name: the name of the dungeon crawler
+            hit_points: the amount of hit points (default 100)
+            attack: the amount of normal attack damage (default 25)
+            magic_attack: the amount of magic attack damage (default 50)
+            mana: the amount of mana points remaining (default 10)
         """
         super().__init__(name, hit_points, attack)
         self._magic_attack = magic_attack
@@ -150,8 +162,12 @@ class ChildClass(ParentClass):
         return self._mana
 
     def deduct_hit_points(self, amount):
-        """Overloaded method from parent class
-        applies a damage reduction to oncoming damage for a mana cost
+        """applies a damage reduction to oncoming damage for a mana cost
+            
+        Overloaded method from parent class.
+
+        Args:
+            amount: the amount of damage to be applied
         """
         if self.get_mana() > 0:
             dmg_redux = random.randint(0, 25)
@@ -160,10 +176,16 @@ class ChildClass(ParentClass):
         return super().deduct_hit_points(amount)
 
     def magic_attack(self, target):
-        """The mage crawler's magic attack, can only be used if there is enough
-        remaining mana points. When the attack is successful, the mana cost is 
-        applied to the crawler's remaining mana and returns True.
-        Returns False if insufficient mana points.
+        """The mage crawler's magic attack. 
+
+        Can only be used if there is enough remaining mana points. When the attack 
+        is successful, the mana cost is applied to the crawler's remaining mana.
+
+        Args:
+            target: another instance of the crawler class
+
+        Returns:
+            True if the attack is successful, False otherwise.
         """
         if not self.is_alive():
             print(f"{self.get_name()} can't attack when dead", "\n")

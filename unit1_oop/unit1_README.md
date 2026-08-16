@@ -3,14 +3,14 @@
 <a href="../unit1_oop/unit1_discussion.py#L0"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 # <kbd>module</kbd> `unit1_discussion.py`
-=========================================================== Unit 1 DISCUSSION: Python OOP, Namespaces, and Copying =========================================================== 
 
-INSTRUCTIONS: In this assignment, you will build and explore object-oriented programming (OOP) concepts in Python. You are provided with starter code containing TODO sections. Your task is to complete, modify, and analyze the code to demonstrate understanding of inheritance, namespaces, and object copying. 
+
+
 
 
 ---
 
-<a href="../unit1_oop/unit1_discussion.py#L204"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="../unit1_oop/unit1_discussion.py#L226"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ## <kbd>function</kbd> `demonstrate_namespaces`
 
@@ -25,7 +25,7 @@ demonstrate_namespaces()
 
 ---
 
-<a href="../unit1_oop/unit1_discussion.py#L230"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="../unit1_oop/unit1_discussion.py#L252"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ## <kbd>function</kbd> `demonstrate_copying`
 
@@ -40,7 +40,7 @@ demonstrate_copying()
 
 ---
 
-<a href="../unit1_oop/unit1_discussion.py#L259"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="../unit1_oop/unit1_discussion.py#L281"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ## <kbd>function</kbd> `main`
 
@@ -56,9 +56,20 @@ main()
 ---
 
 ## <kbd>class</kbd> `ChildClass`
-A defensive mage class with a damage reduction ability, extends crawler 
+A defensive mage class with a damage reduction ability, extends crawler. 
 
-<a href="../unit1_oop/unit1_discussion.py#L129"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+
+
+**Attributes:**
+ 
+ - <b>`name`</b>:  the name of the dungeon crawler 
+ - <b>`hit_points`</b>:  the amount of hit points (default 100) 
+ - <b>`attack`</b>:  the amount of normal attack damage (default 25) 
+ - <b>`is_alive`</b>:  the status of the crawler 
+ - <b>`magic_attack`</b>:  the amount of magic attack damage (default 50) 
+ - <b>`mana`</b>:  the amount of mana points remaining (default 10) 
+
+<a href="../unit1_oop/unit1_discussion.py#L142"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>function</kbd> `__init__`
 
@@ -68,16 +79,22 @@ __init__(name, hit_points=100, attack=25, magic_attack=50, mana=10)
 
 Create a new defensive mage crawler instance 
 
-the mage's alive status is set to True when instantiated. 
 
-name            the name of the dungeon crawler hit_points      the amount of hit points (default 100) attack          the amount of normal attack damage (default 25) magic_attack    the amount of magic attack damage (default 50) mana            the amount of mana points remaining (default 10) 
+
+**Args:**
+ 
+ - <b>`name`</b>:  the name of the dungeon crawler 
+ - <b>`hit_points`</b>:  the amount of hit points (default 100) 
+ - <b>`attack`</b>:  the amount of normal attack damage (default 25) 
+ - <b>`magic_attack`</b>:  the amount of magic attack damage (default 50) 
+ - <b>`mana`</b>:  the amount of mana points remaining (default 10) 
 
 
 
 
 ---
 
-<a href="../unit1_oop/unit1_discussion.py#L87"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="../unit1_oop/unit1_discussion.py#L88"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>function</kbd> `attack`
 
@@ -85,15 +102,24 @@ name            the name of the dungeon crawler hit_points      the amount of hi
 attack(target)
 ```
 
-Attack another crawler 
+Basic Attack 
 
 Displays the amount of damage dealt and the target's information after each  successful attack. 
 
-Return True if the attack was successful, False if the crawler is currently dead, False if the target is already dead. 
+
+
+**Args:**
+ 
+ - <b>`target`</b>:  another instance of the crawler class 
+
+
+
+**Returns:**
+ True if the attack is successful, False otherwise. 
 
 ---
 
-<a href="../unit1_oop/unit1_discussion.py#L152"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="../unit1_oop/unit1_discussion.py#L164"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>function</kbd> `deduct_hit_points`
 
@@ -101,11 +127,19 @@ Return True if the attack was successful, False if the crawler is currently dead
 deduct_hit_points(amount)
 ```
 
-Overloaded method from parent class applies a damage reduction to oncoming damage for a mana cost 
+applies a damage reduction to oncoming damage for a mana cost  
+
+Overloaded method from parent class. 
+
+
+
+**Args:**
+ 
+ - <b>`amount`</b>:  the amount of damage to be applied 
 
 ---
 
-<a href="../unit1_oop/unit1_discussion.py#L54"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="../unit1_oop/unit1_discussion.py#L48"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>function</kbd> `get_attack`
 
@@ -117,7 +151,7 @@ returns the crawler's attack damage
 
 ---
 
-<a href="../unit1_oop/unit1_discussion.py#L50"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="../unit1_oop/unit1_discussion.py#L44"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>function</kbd> `get_hit_points`
 
@@ -129,7 +163,7 @@ returns the crawler's remaining hit points
 
 ---
 
-<a href="../unit1_oop/unit1_discussion.py#L144"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="../unit1_oop/unit1_discussion.py#L156"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>function</kbd> `get_magic_attack`
 
@@ -141,7 +175,7 @@ returns the crawler's magic attack damage
 
 ---
 
-<a href="../unit1_oop/unit1_discussion.py#L148"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="../unit1_oop/unit1_discussion.py#L160"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>function</kbd> `get_mana`
 
@@ -153,7 +187,7 @@ returns the crawler's remaining mana
 
 ---
 
-<a href="../unit1_oop/unit1_discussion.py#L46"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="../unit1_oop/unit1_discussion.py#L40"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>function</kbd> `get_name`
 
@@ -165,7 +199,7 @@ returns the crawler's name
 
 ---
 
-<a href="../unit1_oop/unit1_discussion.py#L58"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="../unit1_oop/unit1_discussion.py#L52"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>function</kbd> `is_alive`
 
@@ -177,7 +211,7 @@ returns True if the crawler is still alive, False if dead
 
 ---
 
-<a href="../unit1_oop/unit1_discussion.py#L162"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="../unit1_oop/unit1_discussion.py#L178"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>function</kbd> `magic_attack`
 
@@ -185,7 +219,20 @@ returns True if the crawler is still alive, False if dead
 magic_attack(target)
 ```
 
-The mage crawler's magic attack, can only be used if there is enough remaining mana points. When the attack is successful, the mana cost is  applied to the crawler's remaining mana and returns True. Returns False if insufficient mana points. 
+The mage crawler's magic attack.  
+
+Can only be used if there is enough remaining mana points. When the attack  is successful, the mana cost is applied to the crawler's remaining mana. 
+
+
+
+**Args:**
+ 
+ - <b>`target`</b>:  another instance of the crawler class 
+
+
+
+**Returns:**
+ True if the attack is successful, False otherwise. 
 
 
 ---
@@ -193,7 +240,16 @@ The mage crawler's magic attack, can only be used if there is enough remaining m
 ## <kbd>class</kbd> `ParentClass`
 A dungeon crawler class 
 
-<a href="../unit1_oop/unit1_discussion.py#L32"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+
+
+**Attributes:**
+ 
+ - <b>`name`</b>:  the name of the dungeon crawler 
+ - <b>`hit_points`</b>:  the amount of hit points (default 100) 
+ - <b>`attack`</b>:  the amount of normal attack damage (default 25) 
+ - <b>`is_alive`</b>:  the status of the crawler 
+
+<a href="../unit1_oop/unit1_discussion.py#L27"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>function</kbd> `__init__`
 
@@ -201,18 +257,22 @@ A dungeon crawler class
 __init__(name, hit_points=100, attack=25)
 ```
 
-Create a new dungeon crawler instance. 
+Create a new dungeon crawler instance 
 
-the player's alive status is set to True when instantiated. 
 
-name        the name of the dungeon crawler hit_points  the amount of hit points (default 100) attack      the amount of normal attack damage (default 25) 
+
+**Args:**
+ 
+ - <b>`name`</b>:  the name of the dungeon crawler 
+ - <b>`hit_points`</b>:  the amount of hit points (default 100) 
+ - <b>`attack`</b>:  the amount of normal attack damage (default 25) 
 
 
 
 
 ---
 
-<a href="../unit1_oop/unit1_discussion.py#L87"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="../unit1_oop/unit1_discussion.py#L88"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>function</kbd> `attack`
 
@@ -220,15 +280,24 @@ name        the name of the dungeon crawler hit_points  the amount of hit points
 attack(target)
 ```
 
-Attack another crawler 
+Basic Attack 
 
 Displays the amount of damage dealt and the target's information after each  successful attack. 
 
-Return True if the attack was successful, False if the crawler is currently dead, False if the target is already dead. 
+
+
+**Args:**
+ 
+ - <b>`target`</b>:  another instance of the crawler class 
+
+
+
+**Returns:**
+ True if the attack is successful, False otherwise. 
 
 ---
 
-<a href="../unit1_oop/unit1_discussion.py#L62"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="../unit1_oop/unit1_discussion.py#L56"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>function</kbd> `deduct_hit_points`
 
@@ -236,15 +305,24 @@ Return True if the attack was successful, False if the crawler is currently dead
 deduct_hit_points(amount)
 ```
 
-deduct a specified amount of hit points from the crawler 
+Deduct a specified amount of hit points from the crawler 
 
-Returns True if the damage was deducted, Prints a status update to STDOUT if the crawler dies and changes the crawler's slive status. 
+ Prints a status update to STDOUT if the crawler dies and changes the   crawler's alive status. 
 
-Returns False if the crawler is already dead. 
+
+
+**Args:**
+ 
+ - <b>`amount`</b>:  the amount of damage to be applied 
+
+
+
+**Returns:**
+ True if the damage was deducted, False if otherwise 
 
 ---
 
-<a href="../unit1_oop/unit1_discussion.py#L54"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="../unit1_oop/unit1_discussion.py#L48"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>function</kbd> `get_attack`
 
@@ -256,7 +334,7 @@ returns the crawler's attack damage
 
 ---
 
-<a href="../unit1_oop/unit1_discussion.py#L50"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="../unit1_oop/unit1_discussion.py#L44"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>function</kbd> `get_hit_points`
 
@@ -268,7 +346,7 @@ returns the crawler's remaining hit points
 
 ---
 
-<a href="../unit1_oop/unit1_discussion.py#L46"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="../unit1_oop/unit1_discussion.py#L40"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>function</kbd> `get_name`
 
@@ -280,7 +358,7 @@ returns the crawler's name
 
 ---
 
-<a href="../unit1_oop/unit1_discussion.py#L58"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="../unit1_oop/unit1_discussion.py#L52"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>function</kbd> `is_alive`
 
