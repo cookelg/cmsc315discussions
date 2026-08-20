@@ -24,7 +24,12 @@ class ParentClass:
     """
     CRITICAL_HIT_MULTIPLIER = 3
 
-    def __init__(self, name, hit_points=100, attack=25):
+    def __init__(
+            self,
+            name: str,
+            hit_points: int = 100,
+            attack: int = 25
+    ):
         """Create a new dungeon crawler instance
 
         Args:
@@ -139,7 +144,14 @@ class ChildClass(ParentClass):
     SHIELD_COST = 1
     MAGIC_ATTACK_COST = 3
 
-    def __init__(self, name, hit_points=100, attack=25, magic_attack=50, mana=10):
+    def __init__(
+        self,
+        name: str,
+        hit_points: int = 100,
+        attack: int = 25,
+        magic_attack: int = 50,
+        mana: int = 10
+    ):
         """Create a new defensive mage crawler instance
 
         Args:
@@ -163,7 +175,7 @@ class ChildClass(ParentClass):
 
     def deduct_hit_points(self, amount):
         """applies a damage reduction to oncoming damage for a mana cost
-            
+
         Overloaded method from parent class.
 
         Args:
@@ -254,11 +266,11 @@ def demonstrate_copying():
     print("TODO: Implement shallow copy and deep copy demonstration")
     object1 = ChildClass("Doughnut")
 
-    #Shallow copy, the instance namespace of object2 matches object1
-    object2 = object1 
+    # Shallow copy, the instance namespace of object2 matches object1
+    object2 = object1
 
-    #Deep copy. the instance namespace of object3 is separate from the other 2 instances
-    object3 = deepcopy(object1) 
+    # Deep copy. the instance namespace of object3 is separate from the other 2 instances
+    object3 = deepcopy(object1)
 
     object1._name = "Mongo"
     object3.magic_attack(object1)
