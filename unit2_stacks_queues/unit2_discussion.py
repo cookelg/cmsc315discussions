@@ -13,7 +13,6 @@ explaining key concepts through comments and improved output.
 
 from collections import deque
 
-
 class Stack:
     """Stack Class
 
