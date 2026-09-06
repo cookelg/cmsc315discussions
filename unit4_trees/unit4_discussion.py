@@ -13,10 +13,13 @@ key concepts in your own words using comments and output.
 
 
 class Node:
-    def __init__(self, value):
+    def __init__(self, value: int):
         # TODO (Student):
         # Store the node's value and initialize references
         # to the left and right child nodes.
+        self.value: int = value
+        self.left: Node
+        self.right: Node
         pass
 
 
@@ -24,7 +27,7 @@ class BST:
     def __init__(self):
         # TODO (Student):
         # Initialize an empty Binary Search Tree.
-        pass
+        self.head: Node
 
     def insert(self, value):
         """
