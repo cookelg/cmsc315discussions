@@ -12,9 +12,11 @@ provided code, running experiments on different dataset sizes,
 and clearly explaining your results through code comments
 and program output.
 """
+import random
+import time
 
 
-def linear_search(lst, target):
+def linear_search(lst, target) -> int:
     """
     TODO (Student):
     Implement a linear search algorithm.
@@ -26,10 +28,13 @@ def linear_search(lst, target):
     - Add comments explaining why linear search
       has O(n) time complexity.
     """
-    pass
+    for i, value in enumerate(lst):
+        if target == value:
+            return i
+    return -1
 
 
-def binary_search(lst, target):
+def binary_search(lst, target) -> int:
     """
     TODO (Student):
     Implement a binary search algorithm.
@@ -42,7 +47,19 @@ def binary_search(lst, target):
     - Add comments explaining how each iteration
       reduces the search space.
     """
-    pass
+    return binary_search_recursive(lst, 0, len(lst) - 1, target)
+
+
+def binary_search_recursive(lst: list, low: int, high: int, target) -> int:
+    if low > high:
+        return -1
+    mid = int((low + high) / 2)
+    if lst[mid] > target:
+        return binary_search_recursive(lst, low, mid - 1, target)
+    elif lst[mid] < target:
+        return binary_search_recursive(lst, mid + 1, high, target)
+    else:
+        return mid
 
 
 def main():
@@ -63,6 +80,23 @@ def main():
     print("\n=== SMALL DATASET TEST ===")
     print("TODO: Create a small dataset and test both searches.")
 
+    lst = sorted(random.sample(range(1, 101), 25))
+    print(lst)
+    start_time = time.perf_counter()
+    print(f"7 found at index {linear_search(lst, 7)}")
+    end_time = time.perf_counter()
+    total_time_sec = end_time - start_time
+    total_time_milli = total_time_sec * 1000
+    print(f"Linear search time elapsed: {total_time_milli:.6f} milliseconds")
+    print(f"Linear time elapsed: {total_time_sec:.6f} seconds")
+    start_time = time.perf_counter()
+    print(f"7 found at index {binary_search(lst, 7)}")
+    end_time = time.perf_counter()
+    total_time_sec = end_time - start_time
+    total_time_milli = total_time_sec * 1000
+    print(f"Binary search time elapsed: {total_time_milli:.6f} milliseconds")
+    print(f"Binary search time elapsed: {total_time_sec:.6f} seconds")
+
     # ===============================
     # TODO (Student): LARGE DATASET
     # ===============================
@@ -77,6 +111,22 @@ def main():
     print("\n=== LARGE DATASET TEST ===")
     print("TODO: Create a larger dataset and compare results.")
 
+    lst = sorted(random.sample(range(1, 30001), 10000))
+
+    start_time = time.perf_counter()
+    print(f"9876 found at index {linear_search(lst, 9876)}")
+    end_time = time.perf_counter()
+    total_time_sec = end_time - start_time
+    total_time_milli = total_time_sec * 1000
+    print(f"Linear search time elapsed: {total_time_milli:.6f} milliseconds")
+    print(f"Linear time elapsed: {total_time_sec:.6f} seconds")
+    start_time = time.perf_counter()
+    print(f"9876 found at index {binary_search(lst, 9876)}")
+    end_time = time.perf_counter()
+    total_time_sec = end_time - start_time
+    total_time_milli = total_time_sec * 1000
+    print(f"Binary search time elapsed: {total_time_milli:.6f} milliseconds")
+    print(f"Binary search time elapsed: {total_time_sec:.6f} seconds")
     # ===============================
     # TODO (Student): EDGE CASES
     # ===============================
