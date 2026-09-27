@@ -12,9 +12,10 @@ This project explores two fundamental sorting algorithms:
 Your goal is to demonstrate both your coding ability and your
 understanding of algorithm efficiency and behavior.
 """
+import random
 
 
-def bubble_sort(lst):
+def bubble_sort(lst: list) -> list:
     """
     TODO (Student):
     Implement Bubble Sort.
@@ -28,10 +29,26 @@ def bubble_sort(lst):
     - Add meaningful comments.
 
     """
-    pass
+    output = lst.copy()
+
+    for i in range(len(output) - 1):
+        for j in range(len(output) - i - 1):
+            if output[j] > output[j + 1]:
+                temp = output[j]
+                output[j] = output[j + 1]
+                output[j + 1] = temp
+
+    return output
 
 
-def merge_sort(lst):
+def merge_sort(lst: list) -> list:
+    output = lst.copy()
+
+    merge_sort_recursive(output)
+
+    return output
+
+def merge_sort_recursive(lst: list):
     """
     TODO (Student):
     Implement Merge Sort.
@@ -45,10 +62,19 @@ def merge_sort(lst):
     - Add meaningful comments.
 
     """
-    pass
+    if len(lst) > 1:
+        mid = len(lst) // 2
+        left_partition = lst[:mid]
+        right_partition = lst[mid:]
+
+        merge_sort_recursive(left_partition)
+        merge_sort_recursive(right_partition)
+
+        merge(lst, left_partition, right_partition)
 
 
-def merge(left, right):
+
+def merge(lst: list, left_partition: list, right_partition: list):
     """
     TODO (Student):
     Implement the merge step used by Merge Sort.
@@ -60,7 +86,28 @@ def merge(left, right):
     - Return the merged sorted list.
     - Add meaningful comments.
     """
-    pass
+    left_index = 0
+    right_index = 0
+    arg_lst_index = 0
+
+    while left_index < len(left_partition) and right_index < len(right_partition):
+        if left_partition[left_index] < right_partition[right_index]:
+            lst[arg_lst_index] = left_partition[left_index]
+            left_index += 1
+        else:
+            lst[arg_lst_index] = right_partition[right_index]
+            right_index += 1
+        arg_lst_index += 1
+
+    while left_index < len(left_partition):
+        lst[arg_lst_index] = left_partition[left_index]
+        left_index += 1
+        arg_lst_index += 1
+
+    while right_index < len(right_partition):
+        lst[arg_lst_index] = right_partition[right_index]
+        right_index += 1
+        arg_lst_index += 1
 
 
 def main():
@@ -90,6 +137,16 @@ def main():
     # 3. Sort using both algorithms.
     # 4. Compare the results.
 
+
+    lst = random.sample(range(1, 101), 25)
+
+    merge_sorted_list = merge_sort(lst)
+    bubble_sorted_list = bubble_sort(lst)
+
+    print(lst)
+    print(merge_sorted_list)
+    print(bubble_sorted_list)
+    
     print("\n=== DATASET #2 ===")
     print("TODO: Create a second dataset and compare sorting results.")
 
